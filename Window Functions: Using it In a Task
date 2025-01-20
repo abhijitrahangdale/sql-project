@@ -1,0 +1,96 @@
+find out customer wise net sales percentage contribution 
+	with cte1 as (
+		select 
+                    customer, 
+                    round(sum(net_sales)/1000000,2) as net_sales_mln
+        	from net_sales s
+        	join dim_customer c
+                    on s.customer_code=c.customer_code
+        	where s.fiscal_year=2021
+        	group by customer)
+	select 
+            *,
+            net_sales_mln*100/sum(net_sales_mln) over() as pct_net_sales
+	from cte1
+	order by net_sales_mln desc
+
+### Window Functions: ROW_NUMBER, RANK, DENSE_RANK
+ Show top 2 expenses in each category
+	select * from 
+	     (select 
+                  *, 
+    	          row_number() over (partition by category order by amount desc) as row_num
+	      from random_tables.expenses) x
+	where x.row_num<3
+
+* If two items have same expense then row_number doesnt work. We need a true rank for which we need to use either a rank or dense_rank() function.(demo using student_marks table)
+	select 
+	     *,
+             row_number() over (order by marks desc) as row_num,
+             rank() over (order by marks desc) as rank_num,
+             dense_rank() over (order by marks desc) as dense_rank_num
+	from random_tables.student_marks;
+
+* Find out top 3 products from each division by total quantity sold in a given year
+	with cte1 as 
+		(select
+                     p.division,
+                     p.product,
+                     sum(sold_quantity) as total_qty
+                from fact_sales_monthly s
+                join dim_product p
+                      on p.product_code=s.product_code
+                where fiscal_year=2021
+                group by p.product),
+           cte2 as 
+	        (select 
+                     *,
+                     dense_rank() over (partition by division order by total_qty desc) as drnk
+                from cte1)
+	select * from cte2 where drnk<=3
+
+* Creating stored procedure for the above query
+	CREATE PROCEDURE `get_top_n_products_per_division_by_qty_sold`(
+        	in_fiscal_year INT,
+    		in_top_n INT
+	)
+	BEGIN
+	     with cte1 as (
+		   select
+                       p.division,
+                       p.product,
+                       sum(sold_quantity) as total_qty
+                   from fact_sales_monthly s
+                   join dim_product p
+                       on p.product_code=s.product_code
+                   where fiscal_year=in_fiscal_year
+                   group by p.product),            
+             cte2 as (
+		   select 
+                        *,
+                        dense_rank() over (partition by division order by total_qty desc) as drnk
+                   from cte1)
+	     select * from cte2 where drnk <= in_top_n;
+	END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
