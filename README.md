@@ -1,14 +1,14 @@
 # sql-project
 
-* Finance Analytics, Top Customers , Markets, Products
-* Company: AtliQ Hardwares
+## Finance Analytics, Top Customers , Markets, Products
+## Company: AtliQ Hardwares
 
-  AtliQ Hardwares is a fictional top computer hardware maker in India with a global reach. The company focuses on using data analytics to make smart, informed decisions..
+## AtliQ Hardwares is a fictional top computer hardware maker in India with a global reach. The company focuses on using data analytics to make smart, informed decisions..
 
- Challenge
+## Challenge
 AtliQ Hardwares identified a gap in their ability to make quick, smart data-informed decisions. To bridge this gap, they aimed to expand their data analytics team by hiring junior data analysts proficient in both technical and soft skills. Tony Sharma, their Data Analytics Director, devised a SQL challenge to evaluate these skills.
 
-Task :-1
+## Task :-1
 As a product owner , I want to generate a report of individuals products sales (aggregated on a monthly basis at the product code level) for Croma India customer for fy-2021 so that I can track individuals product sales and run further product analytics on it excel.
 The report should have following fields.
 1.Month
@@ -18,8 +18,8 @@ The report should have following fields.
 5.Gross Price Per Items
 6.Gross Price Total
 
-My Approach
-Data Extraction with SQL:
+## My Approach
+### Data Extraction with SQL:
 
 1.Used MySQL to write queries and fetch the needed data.
 Data Visualization:
@@ -32,8 +32,11 @@ Actionable Insights:
 
 4.Provided actionable insights and recommendations to assist the management team in making informed decisions.
 
-Outcome
+## Outcome
 This project showed my ability to work with complex data queries and share findings in a clear and engaging way. It helped me improve both my technical skills and my ability to explain insights effectively.
+
+[LinkedIn Project Link](https://www.linkedin.com/posts/abhijit-rahangdale-b19574319_sql-project-activity-7287131432542437379-B8bh?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFC1JEUBtr9C5d_FjiuElFATIj3-pWDMSi8)
+
 
 
 
